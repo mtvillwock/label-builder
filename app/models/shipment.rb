@@ -4,4 +4,5 @@ class Shipment < ActiveRecord::Base
   belongs_to :parcel
 
   # accepts_nested_attributes_for :to_address, :from_address, :parcel
+  # validates_presence_of :parcel_id, :to_address_id, :from_address_id
 end
