@@ -1,25 +1,68 @@
 <h1>New Shipment</h1>
 <%= form_for(@shipment) do |f| %>
-  <div class="error_messages">
-    <h2><%= pluralize(@shipment.errors.count, "error") %> prohibited this shipment from being created:</h2>
-    <ul>
-      <% @shipment.error.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
+  <% if @shipment.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@shipment.errors.count, "error") %> prohibited this shipment from being created:</h2>
+      <ul>
+        <% @shipment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
     <!-- Can extract these fields_for sections to partials later -->
-    <%= f.fields_for :to_address do |builder| %>
-    <%= builder.label :street1, "Street 1" %>
+    <h3>To Address:</h3>
+    <%= f.fields_for :to_address do |address| %>
+      <%= address.label :name, "name" %>
+      <%= address.text_field :name %>
+      <%= address.label :street1, "Street 1" %>
+      <%= address.text_field :street1 %>
+      <%= address.label :street2, "Street 2" %>
+      <%= address.text_field :street2 %>
+      <%= address.label :city, "city" %>
+      <%= address.text_field :city %>
+      <%= address.label :state, "state" %>
+      <%= address.text_field :state %>
+      <%= address.label :zip, "zip" %>
+      <%= address.text_field :zip %>
+      <%= address.label :country, "country" %>
+      <%= address.text_field :country %>
     <% end %>
 
-    <%= f.fields_for :from_address do |builder| %>
-    <%= builder.label :street1, "Street 1" %>
-    <% end %>
+    <h3>From Address:</h3>
+    <div class="from-address">
+      <%= f.fields_for :from_address do |address| %>
+        <%= address.label :name, "name" %>
+      <%= address.text_field :name %>
+      <%= address.label :street1, "Street 1" %>
+      <%= address.text_field :street1 %>
+      <%= address.label :street2, "Street 2" %>
+      <%= address.text_field :street2 %>
+      <%= address.label :city, "city" %>
+      <%= address.text_field :city %>
+      <%= address.label :state, "state" %>
+      <%= address.text_field :state %>
+      <%= address.label :zip, "zip" %>
+      <%= address.text_field :zip %>
+      <%= address.label :country, "country" %>
+      <%= address.text_field :country %>
+      <% end %>
+    </div>
 
-    <%= f.fields_for :parcel do |builder| %>
-    <%= builder.label :weight, "Weight" %>
-    <% end %>
+    <h3>Parcel</h3>
+    <div class="parcel">
+      <%= f.fields_for :parcel do |parcel| %>
+      <%= parcel.label :weight, "Weight" %>
+      <%= parcel.text_field :weight %>
+      <%= parcel.label :length, "Length" %>
+      <%= parcel.text_field :length %>
+      <%= parcel.label :width, "Width" %>
+      <%= parcel.text_field :width %>
+      <%= parcel.label :height, "Height" %>
+      <%= parcel.text_field :height %>
+      <% end %>
+    </div>
 
+    <%= f.submit %>
 <% end %>
