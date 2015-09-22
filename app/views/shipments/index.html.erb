@@ -1,0 +1,11 @@
+<h1>Shipments Index</h1>
+<%= link_to 'New shipment', new_shipment_path %>
+<% if @shipments.empty? %>
+<p>No shipments have been made yet.</p>
+<% else %>
+<ul>
+  <% @shipments.each do |shipment| %>
+  <%= shipment.inspect %>
+  <% end %>
+</ul>
+<% end %>
